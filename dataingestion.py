@@ -22,7 +22,7 @@ def run(argv= None):
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or cloud',default= 'gs://myhello/result1.csv')
+    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or''a file in a Google Storage Bucket.',default= 'gs://myhello/result1.csv')
 
 
     parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='emp.newtable')
