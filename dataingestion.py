@@ -13,7 +13,7 @@ class Dataingestion():
     def parse_method(self,strinput):
         values = re.split(",",re.sub('\r\n', '' ,re.sub(u'"','',strinput)))
 
-        row = dict(zip(('id1','name','date','user_id','class1','tag_based'),values))
+        row = dict(zip(('id','name','date','user_id','class','tag_based'),values))
 
         return row
 
@@ -38,7 +38,7 @@ def runit(argv= None):
 
     |'String to BigQuery Row' >> beam.Map(lambda s: dataingestion.parse_method(s))
 
-    |'Write to Bigquery' >> beam.io.Write(beam.io.BigQuerySink(args.output , schema= 'id1 = STRING,name= STRING,date = STRING, user_id = STRING,class1= STRING,tag_based=STRING',
+    |'Write to Bigquery' >> beam.io.Write(beam.io.BigQuerySink(args.output , schema= 'id = STRING,name= STRING,date = STRING, user_id = STRING,class= STRING,tag_based=STRING',
     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
     write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.runit().wait_until_finish()
