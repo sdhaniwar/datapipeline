@@ -25,7 +25,7 @@ def run(argv= None):
     parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.csv')
 
 
-    parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='dataingcp:emp.empdata')
+    parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='emp.empdata')
 
 
     known_args, pipeline_args = parser.parse_known_args(argv)
@@ -33,6 +33,8 @@ def run(argv= None):
     dataingestion = Dataingestion()
 
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
+
+    google_cloud_options.project = 'dataingcp'
     
     (p
 
