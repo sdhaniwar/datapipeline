@@ -43,5 +43,5 @@ def run(argv= None):
     p.run().wait_until_finish()
 
 if __name__ == "__main__":
-    logging.getLogger(runner = True).setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.INFO)
     run()
