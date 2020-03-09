@@ -21,6 +21,10 @@ class Dataingestion():
 def run(argv= None):
 
     parser = argparse.ArgumentParser()
+    options = PipelineOptions(flags=argv)
+    google_cloud_options = options.view_as(GoogleCloudOptions)
+    google_cloud_options.project = 'dataingcp'
+    options.view_as(StandardOptions).runner = 'DataflowRunner'
 
     parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.csv')
 
@@ -31,10 +35,7 @@ def run(argv= None):
     known_args, pipeline_args = parser.parse_known_args(argv)
 
     dataingestion = Dataingestion()
-    options = PipelineOptions(flags=argv)
-    google_cloud_options = options.view_as(GoogleCloudOptions)
-    google_cloud_options.project = 'dataingcp'
-    options.view_as(StandardOptions).runner = 'DataflowRunner'
+    
 
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
     
