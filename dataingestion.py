@@ -27,10 +27,13 @@ def run(argv= None):
 
     parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='emp.empdata')
 
-    dataingestion = Dataingestion()
 
     known_args, pipeline_args = parser.parse_known_args(argv)
+
+    dataingestion = Dataingestion()
+
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
+    
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
