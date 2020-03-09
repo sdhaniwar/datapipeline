@@ -6,7 +6,7 @@ import os
 import logging
 import apache_beam as beam
 
-from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions,StandardOptions
 from apache_beam.io import BigQuerySource
 
 class Dataingestion():
@@ -33,8 +33,10 @@ def run(argv= None):
     dataingestion = Dataingestion()
 
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
-
+    options = PipelineOptions(flags=argv)
+    google_cloud_options = options.view_as(GoogleCloudOptions)
     google_cloud_options.project = 'dataingcp'
+    options.view_as(StandardOptions).runner = 'DataflowRunner'
     
     (p
 
