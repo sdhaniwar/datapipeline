@@ -14,17 +14,14 @@ class Dataingestion():
         values = re.split(",",re.sub('\r\n', '' ,re.sub(u'"','',strinput)))
 
         row = dict(zip(('id','name','date','user_id','class','tag_based'),values))
-
+        print(rowS)
         return row
 
 
 def run(argv= None):
 
     parser = argparse.ArgumentParser()
-    options = PipelineOptions(flags=argv)
-    google_cloud_options = options.view_as(GoogleCloudOptions)
-    google_cloud_options.project = 'dataingcp'
-    options.view_as(StandardOptions).runner = 'DataflowRunner'
+   
 
     parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.csv')
 
@@ -40,7 +37,6 @@ def run(argv= None):
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
     
     (p
-
     |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
 
     |'String to BigQuery Row' >> beam.Map(lambda s: dataingestion.parse_method(s))
