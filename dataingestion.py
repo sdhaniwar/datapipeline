@@ -18,7 +18,7 @@ class Dataingestion():
         return row
 
 
-def run(argv):
+def run(argv= None):
 
     parser = argparse.ArgumentParser()
 
@@ -33,7 +33,7 @@ def run(argv):
     dataingestion = Dataingestion()
 
     p = beam.Pipeline(options=PipelineOptions(pipeline_args))
-
+    
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
