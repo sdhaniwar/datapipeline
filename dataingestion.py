@@ -31,7 +31,6 @@ def run(argv= None):
 
     args, pipelineknown = parser.parse_known_args(argv)
     p = beam.Pipeline(options=PipelineOptions(pipelineknown))
-    google_cloud_options.project = 'dataingcp'
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
