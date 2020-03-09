@@ -29,7 +29,7 @@ def run(argv= None):
 
     dataingestion = Dataingestion()
 
-    args, pipelineknown = parser.parse_known_args(argv, runner = True)
+    args, pipelineknown = parser.parse_known_args(argv)
     p = beam.Pipeline(options=PipelineOptions(pipelineknown))
     (p
 
@@ -43,5 +43,5 @@ def run(argv= None):
     p.run().wait_until_finish()
 
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.INFO,runner = True)
     run()
