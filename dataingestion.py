@@ -29,8 +29,8 @@ def run(argv= None):
 
     dataingestion = Dataingestion()
 
-    known_args, pipelineknown = parser.parse_known_args(argv)
-    p = beam.Pipeline(options=PipelineOptions(pipelineknown))
+    known_args, pipeline_args = parser.parse_known_args(argv)
+    p = beam.Pipeline(options=PipelineOptions(pipeline_args))
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
