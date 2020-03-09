@@ -18,7 +18,7 @@ class Dataingestion():
         return row
 
 
-def run(argv= None):
+def run(argv= None,runner = True):
 
     parser = argparse.ArgumentParser()
 
