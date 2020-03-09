@@ -8,6 +8,7 @@ import apache_beam as beam
 
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.io import BigQuerySource
+from apache_beam.io import BigQueryDisposition
 
 class Dataingestion():
     def parse_method(self,strinput):
