@@ -20,7 +20,7 @@ class Dataingestion():
 
 def run(argv= None):
 
-    parser = argparse.ArgumentParser(runner = True)
+    parser = argparse.ArgumentParser()
 
     parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.csv')
 
@@ -30,7 +30,7 @@ def run(argv= None):
     dataingestion = Dataingestion()
 
     args, pipelineknown = parser.parse_known_args(argv)
-    p = beam.Pipeline(options=PipelineOptions(pipelineknown))
+    p = beam.Pipeline(options=PipelineOptions(pipelineknown), runner= True)
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
