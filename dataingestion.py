@@ -29,15 +29,15 @@ def run(argv= None):
 
     dataingestion = Dataingestion()
 
-    args, pipelineknown = parser.parse_known_args(argv)
+    known_args, pipelineknown = parser.parse_known_args(argv)
     p = beam.Pipeline(options=PipelineOptions(pipelineknown))
     (p
 
-    |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
+    |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
 
     |'String to BigQuery Row' >> beam.Map(lambda s: dataingestion.parse_method(s))
 
-    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(args.output , schema= 'id : STRING,name : STRING,date : STRING, user_id : STRING,class : STRING,tag_based : STRING',
+    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(known_args.output , schema= 'id : STRING,name : STRING,date : STRING, user_id : STRING,class : STRING,tag_based : STRING',
     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
     write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.run().wait_until_finish()
