@@ -18,7 +18,7 @@ class Dataingestion():
         return row
 
 
-def run(argv= None,runner = True):
+def run(argv= None):
 
     parser = argparse.ArgumentParser()
 
@@ -31,7 +31,7 @@ def run(argv= None,runner = True):
 
     args, pipelineknown = parser.parse_known_args(argv)
     p = beam.Pipeline(options=PipelineOptions(pipelineknown))
-    pass
+    google_cloud_options.project = 'dataingcp'
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
