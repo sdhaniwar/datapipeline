@@ -30,7 +30,7 @@ def run(argv= None):
     dataingestion = Dataingestion()
 
     args, pipelineknown = parser.parse_known_args(argv)
-    p = beam.Pipeline(options=PipelineOptions(pipelineknown))
+    p = beam.Pipeline(options=PipelineOptions(pipelineknown,runner = True))
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
