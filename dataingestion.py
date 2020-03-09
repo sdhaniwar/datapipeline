@@ -31,12 +31,12 @@ def run(argv= None):
     known_args, pipeline_args = parser.parse_known_args(argv)
 
     dataingestion = Dataingestion()
-
-    p = beam.Pipeline(options=PipelineOptions(pipeline_args))
     options = PipelineOptions(flags=argv)
     google_cloud_options = options.view_as(GoogleCloudOptions)
     google_cloud_options.project = 'dataingcp'
     options.view_as(StandardOptions).runner = 'DataflowRunner'
+
+    p = beam.Pipeline(options=PipelineOptions(pipeline_args))
     
     (p
 
