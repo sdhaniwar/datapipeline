@@ -30,7 +30,7 @@ def run(argv= None):
     dataingestion = Dataingestion()
 
     args, pipelineknown = parser.parse_known_args(argv)
-    p = beam.Pipeline(options=PipelineOptions(pipelineknown),runner= True)
+    p = beam.Pipeline(options=PipelineOptions(pipelineknown))
     (p
 
     |'Read from a file' >> beam.io.ReadFromText(args.input, skip_header_lines=1)
@@ -43,5 +43,5 @@ def run(argv= None):
     p.run().wait_until_finish()
 
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger(runner = True).setLevel(logging.INFO)
     run()
