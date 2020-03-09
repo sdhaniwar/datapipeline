@@ -40,7 +40,7 @@ def run(argv= None):
     |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(args.output , schema= 'id : STRING,name : STRING,date : STRING, user_id : STRING,class : STRING,tag_based : STRING',
     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
     write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
-    p.run().wait_until_finish()
+    p.run().wait_until_finish(runner = True)
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
