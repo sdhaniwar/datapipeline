@@ -22,7 +22,7 @@ def run(argv= None):
     parser = argparse.ArgumentParser()
    
 
-    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.json')
+    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or cloud',default= 'gs://mydstore/result1.csv')
 
 
     parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='emp.empdata')
@@ -44,7 +44,7 @@ def run(argv= None):
 
     |'String to BigQuery Row' >> beam.Map(lambda s: dataingestion.parse_method(s))
 
-    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(known_args.output , schema='id:STRING,name:STRING,date:STRING,user_id:STRING,class:STRING,tag_base:STRING',
+    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(known_args.output , schema='id:STRING,name:STRING,date:STRING,user_id:STRING,class:STRING,tag_based:STRING',
     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
     write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.run().wait_until_finish()
