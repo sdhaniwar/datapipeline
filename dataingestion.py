@@ -11,8 +11,7 @@ from apache_beam.io import BigQuerySource
 
 class Dataingestion():
     def parse_method(self,strinput):
-        values = re.split(",",strinput)
-
+        
         row = dict(zip(('id','name','date','user_id','class','tag_based'),values))
         
         return row
