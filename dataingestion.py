@@ -44,7 +44,7 @@ def run(argv= None):
 
     |'String to BigQuery Row' >> beam.Map(lambda s: dataingestion.parse_method(s))
 
-    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(known_args.output , schema= 'id : STRING,name : STRING,date : STRING, user_id : STRING,class : STRING,tag_based : STRING',
+    |'Write to Bigquery' >> beam.io.Write(beam.io.WriteToBigQuery(known_args.output , schema= 'id : number,name : string,date : date, user_id : number,class : string,tag_based : string',
     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
     write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE)))
     p.run().wait_until_finish()
