@@ -22,7 +22,7 @@ def run(argv= None):
     parser = argparse.ArgumentParser()
    
 
-    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.csv')
+    parser.add_argument('--input', dest='input',required=False,help='Input file is read from local or',default= 'gs://mydstore/result1.json')
 
 
     parser.add_argument('--output', dest= 'output', required=False, help='output BQ table to write results to',default='emp.empdata')
@@ -35,7 +35,7 @@ def run(argv= None):
     options=PipelineOptions(pipeline_args)
     google_cloud_options = options.view_as(GoogleCloudOptions)
     google_cloud_options.job_name = 'myjob'
-    google_cloud_options.staging_location = 'gs://mydstore/result1.csv'
+    google_cloud_options.staging_location = 'gs://mydstore/result1'
     google_cloud_options.temp_location = 'gs://mydstore/temp'
     p = beam.Pipeline(options= options)
     
