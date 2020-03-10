@@ -12,7 +12,7 @@ from apache_beam.io import BigQuerySource
 class Dataingestion():
     def parse_method(self,strinput):
         
-        row = dict(zip(('id','name','date','user_id','class','tag_based'),values))
+        row = dict(zip(('id','name','date','user_id','class','tag_based'),strinput))
         
         return row
 
