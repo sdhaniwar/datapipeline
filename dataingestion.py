@@ -32,8 +32,12 @@ def run(argv= None):
 
     dataingestion = Dataingestion()
     
-
-    p = beam.Pipeline(options=PipelineOptions(pipeline_args))
+    options=PipelineOptions(pipeline_args)
+    google_cloud_options = options.view_as(GoogleCloudOptions)
+    google_cloud_options.job_name = 'myjob'
+    google_cloud_options.staging_location = 'gs://mydstore/result1.csv'
+    google_cloud_options.temp_location = 'gs://mydstore/temp'
+    p = beam.Pipeline(options= options)
     
     (p
     |'Read from a file' >> beam.io.ReadFromText(known_args.input, skip_header_lines=1)
