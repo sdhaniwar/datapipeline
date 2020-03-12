@@ -1,38 +1,25 @@
-from flask import Flask, jsonify,render_template,request,redirect
-import flask_mysqldb from MYSQL
-import yaml
-
+from flask import Flask
+from flask import jsonify
+from flask import request
+import pymongo
 
 app = Flask(__name__)
 
-# Configure db
-db = yaml.load(open('db.yaml'))
-app.config['MYSQL_HOST'] = db['mysql_host']
-app.config['MYSQL_USER'] = db['mysql_user']
-app.config['MYSQL_PASSWORD'] = db['mysql_password']
-app.config['MYSQL_DB'] = db['mysql_db']
+app.config['MONGO_DBNAME'] = 'dataflow'
+app.config['MONGO_URI'] = 'mongodb+srv://sdhaniwar:<sumeet1508>@cluster0-c00d8.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
-mysql = MySQL(app)
-@app.route('/todo/api', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # Fetch form data
-        userDetails = request.form
-        id = userDetails['id']
-        emp_id=userDetails['emp_id']
-        name=userDetails['name']
-        industry=userDetails['industry']
-        mobile=userDetails['mobile']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users(id,emp_id,name,industry,mobile) VALUES(%s, %s,%s,%,s,%s)",(id,emp_id,name,industry,mobile))
-        mysql.connection.commit()
-        cur.close()
-        return redirect('/users')
-    return render_template('index.html')
+mongo = pymongo(app)
 
-@app.route('/')
-def home():
-     return "We are at the home page"
+
+@app.route('/dataflow', methods=['POST'])
+def add_data():
+  dataflow = mongo.db.dataflow
+  name = request.json['name']
+  distance = request.json['distance']
+  dataflow_id = dataflow.insert({'name': name, 'distance': distance})
+  new_star = dataflow.find_one({'_id': dataflow_id })
+  output = {'name' : new_star['name'], 'distance' : new_star['distance']}
+  return jsonify({'result' : output})
 
 if __name__ == '__main__':
     app.run(debug=True)
