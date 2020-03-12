@@ -1,20 +1,25 @@
 from __future__ import absolute_import
 import argparse
 import re
+import requests
 import csv
-import os
 import logging
 import apache_beam as beam
 
 from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions,StandardOptions
 from apache_beam.io import BigQuerySource
 
+
+            
+
 class Dataingestion():
+
     def parse_method(self,strinput):
         
         row = dict(zip(('id','name','date','user_id','class','tag_based'),strinput))
+                
         
-        return row
+        return row 
 
 
 def run(argv= None):
