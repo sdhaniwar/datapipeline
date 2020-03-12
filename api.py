@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
-from flask import request, PyMongo
+from flask import request
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 
