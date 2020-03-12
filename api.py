@@ -14,7 +14,7 @@ mongo = PyMongo(app)
 
 @app.route('/dataflow', methods=['POST'])
 def add_data():
-  dataflow = mongo.db.dataflow
+  dataflow = mongo.db.dataflow.userdata
   name = request.json['name']
   distance = request.json['distance']
   dataflow_id = dataflow.insert({'name': name, 'distance': distance})
