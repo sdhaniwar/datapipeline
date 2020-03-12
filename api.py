@@ -11,6 +11,9 @@ app.config['MONGO_URI'] = 'mongodb+srv://sdhaniwar:<sumeet1508>@cluster0-c00d8.g
 
 mongo = PyMongo(app)
 
+@app.route('/')
+def home():
+    return 'This is the homepage'
 
 @app.route('/dataflow', methods=['POST'])
 def add_data():
