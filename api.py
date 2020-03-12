@@ -15,8 +15,8 @@ mongo = PyMongo(app)
 def home():
     return 'This is the homepage'
 
-@app.route('/dataflow', methods=['POST'])
-def add_data():
+@app.route('/addata', methods=['POST'])
+def adddata():
   dataflow = mongo.db.dataflow.userdata
   name = request.json['name']
   distance = request.json['distance']
