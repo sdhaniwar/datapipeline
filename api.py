@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import jsonify
 from flask import request
 from flask_pymongo import PyMongo
@@ -18,9 +18,7 @@ def add_data():
   name = request.json['name']
   distance = request.json['distance']
   dataflow_id = dataflow.insert({'name': name, 'distance': distance})
-  new_star = dataflow.find_one({'_id': dataflow_id })
-  output = {'name' : new_star['name'], 'distance' : new_star['distance']}
-  return jsonify({'result' : output})
+  return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
