@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'dataflow'
+app.config['MONGO_COLLECTIONNAME'] = 'userdata'
 app.config['MONGO_URI'] = 'mongodb+srv://sdhaniwar:<sumeet1508>@cluster0-c00d8.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
