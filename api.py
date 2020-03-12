@@ -1,14 +1,13 @@
 from flask import Flask
 from flask import jsonify
-from flask import request
-import pymongo
+from flask import request, PyMongo
 
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'dataflow'
 app.config['MONGO_URI'] = 'mongodb+srv://sdhaniwar:<sumeet1508>@cluster0-c00d8.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
-mongo = pymongo(app)
+mongo = PyMongo(app)
 
 
 @app.route('/dataflow', methods=['POST'])
