@@ -1,7 +1,7 @@
 import requests
 import json
 
-response = requests.get("http://127.0.0.1:5000/")
+response = requests.get("http://127.0.0.1:5000/result")
 
 def jprint(obj):
     #to create a python object
